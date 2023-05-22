@@ -1,0 +1,3 @@
+# Dotfiles
+
+Initial Nixos configuration
