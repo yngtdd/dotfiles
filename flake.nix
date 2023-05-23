@@ -21,12 +21,20 @@
   in {
     defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
 
-    homeConfigurations = {
-      yngtdd = home-manager.lib.homeManagerConfiguration {
-        inherit system pkgs;
-        
-        modules = [ ./user/yngtdd/home.nix ];
-      };
+    homeManagerConfigurations = {
+      inherit system pkgs;
+      # pkgs = nixpkgs.legacyPackages.${system}
+      modules = [ 
+        ./user/yngtdd/home.nix 
+
+        {
+          home = {
+            username = "yngtdd";
+            homeDirectory = "/home/yngtdd";
+            stateVersion = "22.11";
+          };
+        }
+      ];
     };
   
     nixosConfigurations = {

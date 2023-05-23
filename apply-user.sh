@@ -1,6 +1,6 @@
 #!/bin/sh
 
 pushd ~/.dotfiles
-nix build .#homeConfigurations.yngtdd.activationPackage
+nix build .#homeManagerConfigurations.yngtdd.activationPackage
 ./result/activate
 popd

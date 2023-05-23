@@ -1,6 +1,6 @@
 { pkgs, ... }: {
-  home.username = "yngtdd";
-  home.homeDirectory = "/home/yngtdd";
+  # home.username = "yngtdd";
+  # home.homeDirectory = "/home/yngtdd";
   home.packages = with pkgs; [
     alacritty
     bat
@@ -13,7 +13,7 @@
     starship
     xclip
   ]; 
-
-  home.stateVersion = "22.11";
+  
+  # home.stateVersion = "22.11";
   programs.home-manager.enable = true;
 }
