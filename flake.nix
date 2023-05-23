@@ -19,13 +19,21 @@
     lib = nixpkgs.lib;
         
   in {
+    defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
+
+    homeConfigurations = {
+      yngtdd = home-manager.lib.homeManagerConfiguration {
+        inherit system pkgs;
+        
+        modules = [ ./user/yngtdd/home.nix ];
+      };
+    };
+  
     nixosConfigurations = {
       nixos = lib.nixosSystem {
         inherit system;
         
-        modules = [
-          ./system/configuration.nix
-        ];
+        modules = [ ./system/configuration.nix ];
       };
     };
   };
