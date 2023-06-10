@@ -24,7 +24,6 @@
 
     homeManagerConfigurations = {
       inherit system pkgs;
-      # pkgs = nixpkgs.legacyPackages.${system}
       modules = [ 
         ./user/yngtdd/home.nix 
 
