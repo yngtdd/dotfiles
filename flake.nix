@@ -2,12 +2,10 @@
   description = "Todd's System Configuration";
   
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    hyprland.url = "github:hyprwm/Hyprland";
-    home-manager = {
-      url = "github:nix-community/home-manager/release-22.11";
-      inputs.nixpkgs.follows = "nixpkgs";      
-    };
+      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+      hyprland.url = "github:hyprwm/Hyprland";
+      home-manager.url = "github:nix-community/home-manager";
+      home-manager.inputs.nixpkgs.follows = "nixpkgs"; 
   };
 
   outputs = { nixpkgs, home-manager, hyprland, ... }: 
@@ -44,8 +42,13 @@
         
         modules = [ 
             ./system/configuration.nix 
-            hyprland.nixosModules.default
-            { programs.hyprland.enable = true; }
+            
+            hyprland.nixosModules.default 
+            {
+              programs.hyprland.enable = true;
+              programs.hyprland.nvidiaPatches = true;
+              programs.hyprland.xwayland.enable = true;
+            }
         ];
       };
     };
