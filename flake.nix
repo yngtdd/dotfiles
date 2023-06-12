@@ -2,14 +2,15 @@
   description = "Todd's System Configuration";
   
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    hyprland.url = "github:hyprwm/Hyprland";
     home-manager = {
       url = "github:nix-community/home-manager/release-22.11";
       inputs.nixpkgs.follows = "nixpkgs";      
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }: 
+  outputs = { nixpkgs, home-manager, hyprland, ... }: 
   let 
     system = "x86_64-linux";
     pkgs = import nixpkgs {
@@ -41,7 +42,11 @@
       nixos = lib.nixosSystem {
         inherit system;
         
-        modules = [ ./system/configuration.nix ];
+        modules = [ 
+            ./system/configuration.nix 
+            hyprland.nixosModules.default
+            { programs.hyprland.enable = true; }
+        ];
       };
     };
   };
